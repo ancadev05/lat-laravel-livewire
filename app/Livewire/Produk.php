@@ -2,13 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Models\Produk as ModelsProduk;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\Produk as ModelsProduk;
 
 class Produk extends Component
 {
     public $name;
     public $description;
+
+    // #[On('modal-close')] 
 
     public function store()
     {
@@ -17,15 +20,17 @@ class Produk extends Component
             'description' => $this->description,
         ];
 
+        // dd($produk);
+
         ModelsProduk::create($produk);
         
-        // $this->name = null;
-        // $this->description = null;
+        $this->name = null;
+        $this->description = null;
 
-        $this->reset();
+        // $this->reset();
 
         // Emit event untuk menutup modal
-        $this->dispatch('modal-close');
+        // $this->dispatch('modal-close');
     }
 
     public function edit($id)
